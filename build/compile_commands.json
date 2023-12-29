@@ -1,0 +1,110 @@
+[
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++  -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/ImGuiWrapper.dir/src/imgui/imgui_impl_glfw.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/imgui/imgui_impl_glfw.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/imgui/imgui_impl_glfw.cpp",
+  "output": "CMakeFiles/ImGuiWrapper.dir/src/imgui/imgui_impl_glfw.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++  -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/ImGuiWrapper.dir/src/imgui/imgui_impl_opengl3.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/imgui/imgui_impl_opengl3.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/imgui/imgui_impl_opengl3.cpp",
+  "output": "CMakeFiles/ImGuiWrapper.dir/src/imgui/imgui_impl_opengl3.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/ui/full_screen_texture_gl.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/full_screen_texture_gl.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/full_screen_texture_gl.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/ui/full_screen_texture_gl.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/ui/gl_error.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/gl_error.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/gl_error.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/ui/gl_error.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/ui/menu.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/menu.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/menu.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/ui/menu.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/ui/opengl.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/opengl.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/opengl.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/ui/opengl.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/ui/trackball.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/trackball.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/trackball.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/ui/trackball.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/ui/transfer_func.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/transfer_func.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/transfer_func.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/ui/transfer_func.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/ui/transfer_func_2d.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/transfer_func_2d.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/transfer_func_2d.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/ui/transfer_func_2d.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/ui/window.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/window.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/window.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/ui/window.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/ui/surface_cube.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/surface_cube.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/surface_cube.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/ui/surface_cube.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/ui/wireframe_cube.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/wireframe_cube.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/ui/wireframe_cube.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/ui/wireframe_cube.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/render/renderer.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/render/renderer.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/render/renderer.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/render/renderer.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/volume/volume.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/volume/volume.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/volume/volume.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/volume/volume.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/VolVis.dir/src/volume/gradient_volume.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/volume/gradient_volume.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/volume/gradient_volume.cpp",
+  "output": "CMakeFiles/VolVis.dir/src/volume/gradient_volume.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -DGLEW_STATIC -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/Viewer.dir/src/main.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/main.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src/main.cpp",
+  "output": "CMakeFiles/Viewer.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/integrity_tests",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/IntegrityTests.dir/src/main.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/integrity_tests/src/main.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/integrity_tests/src/main.cpp",
+  "output": "integrity_tests/CMakeFiles/IntegrityTests.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/integrity_tests",
+  "command": "/usr/bin/clang++ -DFMT_LOCALE -I\"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/src\" -isystem \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build/vcpkg_installed/arm64-osx/include\" -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wno-unused-parameter -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast -o CMakeFiles/IntegrityTests.dir/src/tests.cpp.o -c \"/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/integrity_tests/src/tests.cpp\"",
+  "file": "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/integrity_tests/src/tests.cpp",
+  "output": "integrity_tests/CMakeFiles/IntegrityTests.dir/src/tests.cpp.o"
+}
+]

@@ -1,0 +1,132 @@
+{
+  "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.2.1/schemas/spdx-schema.json",
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "documentNamespace": "https://spdx.org/spdxdocs/catch2-arm64-osx-2.13.7#1-7327a808-28e7-412d-8351-aaf2d46131bd",
+  "name": "catch2:arm64-osx@2.13.7#1 9bbf3bf8a65703d0dc918e2745e74e42259b0b99932deb5037fbde487f96ab65",
+  "creationInfo": {
+    "creators": [
+      "Tool: vcpkg-1c9ec1978a6b0c2b39c9e9554a96e3e275f7556e"
+    ],
+    "created": "2023-12-17T19:33:31Z"
+  },
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "GENERATES",
+      "relatedSpdxElement": "SPDXRef-binary"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-0"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-1"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-2"
+    },
+    {
+      "spdxElementId": "SPDXRef-binary",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-0",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-1",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-2",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    }
+  ],
+  "packages": [
+    {
+      "name": "catch2",
+      "SPDXID": "SPDXRef-port",
+      "versionInfo": "2.13.7#1",
+      "downloadLocation": "git+https://github.com/Microsoft/vcpkg@4df380019e5c3a0e450798db43d9ce70906b7aad",
+      "homepage": "https://github.com/catchorg/Catch2",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "description": "A modern, header-only test framework for unit testing.",
+      "comment": "This is the port (recipe) consumed by vcpkg."
+    },
+    {
+      "name": "catch2:arm64-osx",
+      "SPDXID": "SPDXRef-binary",
+      "versionInfo": "9bbf3bf8a65703d0dc918e2745e74e42259b0b99932deb5037fbde487f96ab65",
+      "downloadLocation": "NONE",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "This is a binary package built by vcpkg."
+    },
+    {
+      "SPDXID": "SPDXRef-resource-1",
+      "name": "catchorg/Catch2",
+      "downloadLocation": "git+https://github.com/catchorg/Catch2@v2.13.7",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "1c3cbdecc6a3b59360a97789c4784d79d027e1b63bdc42b0e152c3272f7bad647fcd1490aa5caf67f968a6311dc9624b5a70d5eb3fbc1d5179d520e09b76c9ed"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "fileName": ".//Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/vcpkg/buildtrees/versioning_/versions/catch2/4df380019e5c3a0e450798db43d9ce70906b7aad/fix-install-path.patch",
+      "SPDXID": "SPDXRef-file-0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0ba932dca2609d869e68cd8bc0e2ccb618542c7ed29a9b43ed1632bc4a925cdf"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": ".//Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/vcpkg/buildtrees/versioning_/versions/catch2/4df380019e5c3a0e450798db43d9ce70906b7aad/portfile.cmake",
+      "SPDXID": "SPDXRef-file-1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "63d09d75f8014977d281b873e95150fe1bd9284cc9b7f4f60523413d41175130"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": ".//Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/vcpkg/buildtrees/versioning_/versions/catch2/4df380019e5c3a0e450798db43d9ce70906b7aad/vcpkg.json",
+      "SPDXID": "SPDXRef-file-2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5184acc70d31aab251573cccdd7f464338ca769e88015805683f149ccd8af7a7"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ]
+}

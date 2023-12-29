@@ -1,0 +1,106 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						2,
+						3
+					]
+				},
+				{
+					"build" : "integrity_tests",
+					"jsonFile" : "directory-integrity_tests-Debug-80abec9dae0d80a0121e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "integrity_tests",
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "GLViewer",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ImGuiWrapper::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ImGuiWrapper-Debug-d771870f2a60db8f29d2.json",
+					"name" : "ImGuiWrapper",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "IntegrityTests::@84c41ca8a0b3f4cd76ce",
+					"jsonFile" : "target-IntegrityTests-Debug-bcdc33a399cc07b40cfe.json",
+					"name" : "IntegrityTests",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Viewer::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Viewer-Debug-14ad16890fb3a9939b87.json",
+					"name" : "Viewer",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "VolVis::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-VolVis-Debug-89cfc352739b60048c72.json",
+					"name" : "VolVis",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/build",
+		"source" : "/Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

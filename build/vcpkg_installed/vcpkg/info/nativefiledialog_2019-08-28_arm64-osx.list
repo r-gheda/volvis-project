@@ -1,0 +1,17 @@
+arm64-osx/
+arm64-osx/debug/
+arm64-osx/debug/lib/
+arm64-osx/debug/lib/libnfd_d.a
+arm64-osx/include/
+arm64-osx/include/nfd.h
+arm64-osx/lib/
+arm64-osx/lib/libnfd.a
+arm64-osx/share/
+arm64-osx/share/nativefiledialog/
+arm64-osx/share/nativefiledialog/copyright
+arm64-osx/share/nativefiledialog/vcpkg.spdx.json
+arm64-osx/share/nativefiledialog/vcpkg_abi_info.txt
+arm64-osx/share/unofficial-nativefiledialog/
+arm64-osx/share/unofficial-nativefiledialog/unofficial-nativefiledialog-config-debug.cmake
+arm64-osx/share/unofficial-nativefiledialog/unofficial-nativefiledialog-config-release.cmake
+arm64-osx/share/unofficial-nativefiledialog/unofficial-nativefiledialog-config.cmake

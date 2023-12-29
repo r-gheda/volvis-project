@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20231229-0933-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.28.0-rc2"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="macOS"
+	Hostname="Isidoros-MacBook-Air.fritz.box"
+	OSRelease="14.1.2"
+	OSVersion="23B92"
+	OSPlatform="arm64"
+	Is64Bits="1"
+	VendorString="IBM"
+	VendorID="IBM"
+	FamilyID="16777228"
+	ModelID="2"
+	ProcessorCacheSize="131072"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="0"
+	TotalPhysicalMemory="24576"
+	LogicalProcessorsPerPhysical="8"
+	ProcessorClockFrequency="0"
+	>
+	<Testing>
+		<StartDateTime>Dec 29 10:33 CET</StartDateTime>
+		<StartTestTime>1703842388</StartTestTime>
+		<TestList/>
+		<EndDateTime>Dec 29 10:33 CET</EndDateTime>
+		<EndTestTime>1703842388</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

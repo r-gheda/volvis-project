@@ -174,9 +174,91 @@ glm::vec4 Renderer::traceRayMIP(const Ray& ray, float sampleStep) const
 //   Use the camera position (m_pCamera->position()) as the light position.
 // Use the bisectionAccuracy function (to be implemented) to get a more precise isosurface location between two steps.
 glm::vec4 Renderer::traceRayISO(const Ray& ray, float sampleStep) const
-{
-    static constexpr glm::vec3 isoColor { 0.8f, 0.8f, 0.2f };
-    return glm::vec4(isoColor, 1.0f);
+{   
+ 
+    //if volume shading is disabled, then simply return the isoColor from the isoValue
+    if (!m_config.volumeShading){
+       
+        // The current position along the ray.
+        glm::vec3 samplePos = ray.origin + ray.tmin * ray.direction;
+
+        // The increment in the ray direction for each sample.
+        const glm::vec3 increment = sampleStep * ray.direction;
+
+        float res = 0.0f;
+
+        for (float t = ray.tmin; t <= ray.tmax; t += sampleStep, samplePos += increment) {
+            // Get the volume value at the current sample position.
+            float val = m_pVolume->getSampleInterpolate(samplePos);
+            
+            // If the value at the current sample position is greater than the iso value then we have found the isosurface.
+            if (val > m_config.isoValue) {
+
+                //unica cosa di cui non sono sicuro, nell'esempio la superficie è gialla mentre a me è bianca
+                res = m_config.isoValue;
+                break;
+                
+            }
+            
+        }
+        return glm::vec4(glm::vec3(res), 1.0f);
+
+    
+    }
+
+    //if volume shading is enabled, then return the phong-shaded color 
+    //at that location using the local gradient (from m_pGradientVolume)
+    else {
+
+        //DRAFT, PROBABLY DOESN'T WORK
+
+        // If volume shading is ENABLED then return the phong-shaded color at that location using the local gradient (from m_pGradientVolume).
+        //   Use the camera position (m_pCamera->position()) as the light position.
+        // Use the bisectionAccuracy function (to be implemented) to get a more precise isosurface location between two steps.
+
+        // The current position along the ray.
+        glm::vec3 samplePos = ray.origin + ray.tmin * ray.direction;
+
+        // The increment in the ray direction for each sample.
+        const glm::vec3 increment = sampleStep * ray.direction;
+
+        for (float t = ray.tmin; t <= ray.tmax; t += sampleStep, samplePos += increment) {
+            // Get the volume value at the current sample position.
+            float val = m_pVolume->getSampleInterpolate(samplePos);
+            
+            // If the value at the current sample position is greater than the iso value then we have found the isosurface.
+            if (val > m_config.isoValue) {
+
+                //get the gradient at the current sample position
+                volume::GradientVoxel gradient = m_pGradientVolume->getGradientInterpolate(samplePos);
+
+                //get the color at the current sample position
+                glm::vec3 color = glm::vec3(val);
+
+                //get the light vector
+                glm::vec3 L = glm::normalize(m_pCamera->position() - samplePos);
+
+                //get the view vector
+                glm::vec3 V = glm::normalize(ray.direction);
+
+                //compute the phong shading
+                glm::vec3 phongShading = computePhongShading(color, gradient, L, V);
+
+                return glm::vec4(phongShading, 1.0f);
+                
+            }
+            
+        }
+
+        return glm::vec4(glm::vec3(0.0f), 1.0f);
+
+        //END DRAFT
+
+
+    }
+    
+    
+
 }
 
 // ======= TODO: IMPLEMENT ========
@@ -184,8 +266,85 @@ glm::vec4 Renderer::traceRayISO(const Ray& ray, float sampleStep) const
 // closely matches the iso value (less than 0.01 difference). Add a limit to the number of
 // iterations such that it does not get stuck in degerate cases.
 float Renderer::bisectionAccuracy(const Ray& ray, float t0, float t1, float isoValue) const
-{
-    return 0.0f;
+{   
+    //DRAFT, PROBABLY DOESN'T WORK
+
+    // The number of iterations to perform.
+    static constexpr int maxIterations = 100;
+
+    // The current iteration.
+    int iteration = 0;
+
+    // The current interval.
+    float a = t0;
+    float b = t1;
+
+    // The current value at the midpoint of the interval.
+    float fc = 0.0f;
+
+    // The current midpoint.
+    float c = 0.0f;
+
+    // The difference between the current value and the iso value.
+    float diff = 0.0f;
+
+    // The current absolute difference between the current value and the iso value.
+    float absDiff = 0.0f;
+
+    // The current absolute difference between the current interval.
+    float absInterval = 0.0f;
+
+    // The current absolute difference between the current interval and the iso value.
+    float absIntervalDiff = 0.0f;
+
+
+    for (iteration = 0; iteration < maxIterations; iteration++) {
+        // Compute the midpoint of the interval.
+        c = (a + b) / 2.0f;
+
+        // Compute the value at the midpoint.
+        fc = m_pVolume->getSampleInterpolate(ray.origin + c * ray.direction);
+
+        // Compute the difference between the value at the midpoint and the iso value.
+        diff = fc - isoValue;
+
+        // Compute the absolute difference between the value at the midpoint and the iso value.
+        absDiff = std::abs(diff);
+
+        // Compute the absolute difference between the interval.
+        absInterval = std::abs(b - a);
+
+        // Compute the absolute difference between the interval and the iso value.
+        absIntervalDiff = std::abs(isoValue - c);
+
+        // If the absolute difference between the value at the midpoint and the iso value is less than 0.01 then we are done.
+        if (absDiff < 0.01f)
+            break;
+
+        // If the absolute difference between the interval is less than 0.01 then we are done.
+        if (absInterval < 0.01f)
+            break;
+
+        // If the absolute difference between the interval and the iso value is less than 0.01 then we are done.
+        if (absIntervalDiff < 0.01f){
+            break;
+        }
+        // If the value at the midpoint is less than the iso value then the iso value lies in the upper half of the interval.
+        if (fc < isoValue) {
+            // Set the start of the interval to the midpoint.
+            a = c;
+        }
+        // Otherwise the iso value lies in the lower half of the interval.
+        else {
+            // Set the end of the interval to the midpoint.
+            b = c;
+        }
+    }
+
+    // Return the midpoint of the interval.
+    return c;
+    //END DRAFT
+
 }
 
 // ======= TODO: IMPLEMENT ========
@@ -196,8 +355,9 @@ float Renderer::bisectionAccuracy(const Ray& ray, float t0, float t1, float isoV
 // Use the given color for the ambient/specular/diffuse (you are allowed to scale these constants by a scalar value).
 // You are free to choose any specular power that you'd like.
 glm::vec3 Renderer::computePhongShading(const glm::vec3& color, const volume::GradientVoxel& gradient, const glm::vec3& L, const glm::vec3& V)
-{
-    return glm::vec3(0.0f);
+{   
+    //TODO: IMPLEMENT
+
 }
 
 // ======= TODO: IMPLEMENT ========
@@ -205,7 +365,40 @@ glm::vec3 Renderer::computePhongShading(const glm::vec3& color, const volume::Gr
 // Use getTFValue to compute the color for a given volume value according to the 1D transfer function.
 glm::vec4 Renderer::traceRayComposite(const Ray& ray, float sampleStep) const
 {
-    return glm::vec4(0.0f);
+
+    // The current position along the ray.
+    glm::vec3 samplePos = ray.origin + ray.tmin * ray.direction;
+
+    // The increment in the ray direction for each sample.
+    const glm::vec3 increment = sampleStep * ray.direction;
+
+    // The accumulated opacity along the ray.
+    float accumulatedOpacity = 0.0f;
+
+    // The accumulated color along the ray.
+    glm::vec4 accumulatedColor(0.0f);
+
+    for (float t = ray.tmin; t <= ray.tmax; t += sampleStep, samplePos += increment) {
+        // Get the volume value at the current sample position.
+        const float val = m_pVolume->getSampleInterpolate(samplePos);
+
+        // Get the color and opacity from the 1D transfer function.
+        const glm::vec4 tfValue = getTFValue(val);
+        const glm::vec3 tfColor = glm::vec3(tfValue);
+        const float tfOpacity = tfValue.a;
+
+        // Accumulate the color and opacity along the ray.
+        accumulatedColor += (1.0f - accumulatedOpacity) * tfOpacity * glm::vec4(tfColor, 1.0f);
+        accumulatedOpacity += (1.0f - accumulatedOpacity) * tfOpacity;
+
+        // If the accumulated opacity is 1.0f then we can stop tracing the ray.
+        if (accumulatedOpacity >= 1.0f)
+            break;
+    }
+
+    // Return the accumulated color.
+    return accumulatedColor;
+    
 }
 
 // ======= DO NOT MODIFY THIS FUNCTION ========
@@ -225,6 +418,7 @@ glm::vec4 Renderer::getTFValue(float val) const
 glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
 {
     return glm::vec4(0.0f);
+
 }
 
 // ======= TODO: IMPLEMENT ========

@@ -20,7 +20,7 @@ find_package(glm CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(unofficial-nativefiledialog CONFIG REQUIRED)
 find_package(Threads REQUIRED)
-find_package(TBB CONFIG REQUIRED)
+# find_package(TBB CONFIG REQUIRED)
 find_package(Microsoft.GSL CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(Catch2 CONFIG REQUIRED)
@@ -35,7 +35,7 @@ target_link_libraries(VolVis
 		glm::glm
 		imgui::imgui
 		unofficial::nativefiledialog::nfd
-		TBB::tbb
+		# TBB::tbb
 		Threads::Threads
 		Microsoft.GSL::GSL
 		fmt::fmt)

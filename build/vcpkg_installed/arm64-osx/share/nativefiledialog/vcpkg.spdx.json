@@ -1,0 +1,132 @@
+{
+  "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.2.1/schemas/spdx-schema.json",
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "documentNamespace": "https://spdx.org/spdxdocs/nativefiledialog-arm64-osx-2019-08-28#1-665b7b41-6f63-4c03-bf04-95943b7e4913",
+  "name": "nativefiledialog:arm64-osx@2019-08-28#1 77f2fbe142411c04891aef1c93a1dc4e5acd523f09ce492ed87509ab2626f12c",
+  "creationInfo": {
+    "creators": [
+      "Tool: vcpkg-1c9ec1978a6b0c2b39c9e9554a96e3e275f7556e"
+    ],
+    "created": "2023-12-17T19:35:12Z"
+  },
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "GENERATES",
+      "relatedSpdxElement": "SPDXRef-binary"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-0"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-1"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-2"
+    },
+    {
+      "spdxElementId": "SPDXRef-binary",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-0",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-1",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-2",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    }
+  ],
+  "packages": [
+    {
+      "name": "nativefiledialog",
+      "SPDXID": "SPDXRef-port",
+      "versionInfo": "2019-08-28#1",
+      "downloadLocation": "git+https://github.com/Microsoft/vcpkg@d765a8f84ba49c18701f68b7471f1b93b7313ddc",
+      "homepage": "https://github.com/mlabbe/nativefiledialog",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "description": "A tiny, neat C library that portably invokes native file open and save dialogs",
+      "comment": "This is the port (recipe) consumed by vcpkg."
+    },
+    {
+      "name": "nativefiledialog:arm64-osx",
+      "SPDXID": "SPDXRef-binary",
+      "versionInfo": "77f2fbe142411c04891aef1c93a1dc4e5acd523f09ce492ed87509ab2626f12c",
+      "downloadLocation": "NONE",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "This is a binary package built by vcpkg."
+    },
+    {
+      "SPDXID": "SPDXRef-resource-1",
+      "name": "mlabbe/nativefiledialog",
+      "downloadLocation": "git+https://github.com/mlabbe/nativefiledialog@ceb75f7abf30736aa8ee4800cde0d444c798f8b9",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "dd2bff28bb08fb1f6b07ad28530da039f176fb641e300b816040a2b2b840611e418cad44fdaf395ec565c50149ce58c80f88f6a77b403b843f2b14f1f2c91d7d"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "fileName": ".//Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/vcpkg/buildtrees/versioning_/versions/nativefiledialog/d765a8f84ba49c18701f68b7471f1b93b7313ddc/CMakeLists.txt",
+      "SPDXID": "SPDXRef-file-0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "252ef5076757490a4161a8cf1d7a39b2bc7d7dcfce95e56408564226ec1beccc"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": ".//Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/vcpkg/buildtrees/versioning_/versions/nativefiledialog/d765a8f84ba49c18701f68b7471f1b93b7313ddc/portfile.cmake",
+      "SPDXID": "SPDXRef-file-1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9abd0a205d76f930d359dbbdc5ca86d4a1bc41ead181a6c4bb472cae88da46d3"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": ".//Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/vcpkg/buildtrees/versioning_/versions/nativefiledialog/d765a8f84ba49c18701f68b7471f1b93b7313ddc/vcpkg.json",
+      "SPDXID": "SPDXRef-file-2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "60ec6922f3cf360e27fb0fbd551fd9061f1c5dfa9750c97c79c7607b170ac229"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ]
+}

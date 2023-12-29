@@ -1,0 +1,110 @@
+{
+  "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.2.1/schemas/spdx-schema.json",
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "documentNamespace": "https://spdx.org/spdxdocs/glfw3-arm64-osx-3.3.4-391b0654-cdea-4396-87e4-adf6d56404fa",
+  "name": "glfw3:arm64-osx@3.3.4 ff1106b5af5bf5d03b2ba8a85cf7a308344625e2c263887932153897f3465051",
+  "creationInfo": {
+    "creators": [
+      "Tool: vcpkg-1c9ec1978a6b0c2b39c9e9554a96e3e275f7556e"
+    ],
+    "created": "2023-12-17T19:34:50Z"
+  },
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "GENERATES",
+      "relatedSpdxElement": "SPDXRef-binary"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-0"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-1"
+    },
+    {
+      "spdxElementId": "SPDXRef-binary",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-0",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-1",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    }
+  ],
+  "packages": [
+    {
+      "name": "glfw3",
+      "SPDXID": "SPDXRef-port",
+      "versionInfo": "3.3.4",
+      "downloadLocation": "git+https://github.com/Microsoft/vcpkg@aa7325438c3156b62488a559218d12e7e860196c",
+      "homepage": "https://github.com/glfw/glfw",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "description": "GLFW is a free, Open Source, multi-platform library for OpenGL, OpenGL ES and Vulkan application development. It provides a simple, platform-independent API for creating windows, contexts and surfaces, reading input, handling events, etc.",
+      "comment": "This is the port (recipe) consumed by vcpkg."
+    },
+    {
+      "name": "glfw3:arm64-osx",
+      "SPDXID": "SPDXRef-binary",
+      "versionInfo": "ff1106b5af5bf5d03b2ba8a85cf7a308344625e2c263887932153897f3465051",
+      "downloadLocation": "NONE",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "This is a binary package built by vcpkg."
+    },
+    {
+      "SPDXID": "SPDXRef-resource-1",
+      "name": "glfw/glfw",
+      "downloadLocation": "git+https://github.com/glfw/glfw@814b7929c5add4b0541ccad26fb81f28b71dc4d8",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "8e34d011ab49940b405998312af4807e4c9837a44d95d873cb3723e7c141da6a10c1dfaf1652f03b31b911f0ae4515ded52cac02844435dc374b93d376921e43"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "fileName": ".//Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/vcpkg/buildtrees/versioning_/versions/glfw3/aa7325438c3156b62488a559218d12e7e860196c/portfile.cmake",
+      "SPDXID": "SPDXRef-file-0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d5b532bee44234d579e2b056d644b967a1647fc6261b0c8465204848bba8e178"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": ".//Users/isidorotamassia/Library/Mobile Documents/com~apple~CloudDocs/DATAV/volvis-project/vcpkg/buildtrees/versioning_/versions/glfw3/aa7325438c3156b62488a559218d12e7e860196c/vcpkg.json",
+      "SPDXID": "SPDXRef-file-1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fbb77c2563944715767754174f711ab1e098b5c4329aa8eaf6385219ddf00b60"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ]
+}

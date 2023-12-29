@@ -121,22 +121,74 @@ float Volume::getSampleNearestNeighbourInterpolation(const glm::vec3& coord) con
 // This function returns the trilinear interpolated value at the continuous 3D position given by coord.
 float Volume::getSampleTriLinearInterpolation(const glm::vec3& coord) const
 {
-    return 0.0f;
+    // check if the coordinate is within volume boundaries, since we only look at direct neighbours we only need to check within 0.5
+    if (glm::any(glm::lessThan(coord + 0.5f, glm::vec3(0))) || glm::any(glm::greaterThanEqual(coord + 0.5f, glm::vec3(m_dim))))
+        return 0.0f;
+
+    // Extract the integer parts of the coordinates and the fractional remainder for interpolation
+    int x0 = static_cast<int>(coord.x);
+    int y0 = static_cast<int>(coord.y);
+    int z0 = static_cast<int>(coord.z);
+
+    float zFactor = coord.z - z0;
+
+    // Boundary checks for the interpolated points
+    if (x0 < 0 || x0 >= m_dim.x - 1 || y0 < 0 || y0 >= m_dim.y - 1 || z0 < 0 || z0 >= m_dim.z - 1)
+        return 0.0f;
+
+    // Perform bilinear interpolation on the bottom and top slices
+    float valueBottom = biLinearInterpolate(glm::vec2(coord.x, coord.y), z0);
+    float valueTop = biLinearInterpolate(glm::vec2(coord.x, coord.y), z0 + 1);
+
+    // Perform linear interpolation between the slices
+    return linearInterpolate(valueBottom, valueTop, zFactor);
 }
+
 
 // This function linearly interpolates the value at X using incoming values g0 and g1 given a factor (equal to the positon of x in 1D)
 //
 // g0--X--------g1
 //   factor
 float Volume::linearInterpolate(float g0, float g1, float factor)
-{
-    return 0.0f;
+{   
+    if (factor < 0.0f || factor > 1.0f)
+        return 0.0f;
+    // linear interpolation is a weighted average of the two values
+    return (1.0f - factor) * g0 + factor * g1;
 }
 
 // This function bi-linearly interpolates the value at the given continuous 2D XY coordinate for a fixed integer z coordinate.
 float Volume::biLinearInterpolate(const glm::vec2& xyCoord, int z) const
 {
-    return 0.0f;
+    // check if the coordinate is within volume boundaries, since we only look at direct neighbours we only need to check within 0.5
+    if (glm::any(glm::lessThan(xyCoord + 0.5f, glm::vec2(0))) || glm::any(glm::greaterThanEqual(xyCoord + 0.5f, glm::vec2(m_dim))))
+        return 0.0f;
+    
+    // get the 4 neighbouring voxels
+    const auto x0 = static_cast<int>(xyCoord.x);
+    const auto y0 = static_cast<int>(xyCoord.y);
+    const auto x1 = x0 + 1;
+    const auto y1 = y0 + 1;
+
+    // Boundary checks for the interpolated points
+    if (x0 < 0 || x0 >= m_dim.x - 1 || y0 < 0 || y0 >= m_dim.y - 1 || z < 0 || z >= m_dim.z - 1)
+        return 0.0f;
+
+    // get the values at the 4 neighbouring voxels
+    const auto g00 = getVoxel(x0, y0, z);
+    const auto g01 = getVoxel(x0, y1, z);
+    const auto g10 = getVoxel(x1, y0, z);
+    const auto g11 = getVoxel(x1, y1, z);
+
+    // interpolate the values in x direction
+    const auto xFactor = xyCoord.x - x0;
+    const auto g0 = linearInterpolate(g00, g10, xFactor);
+    const auto g1 = linearInterpolate(g01, g11, xFactor);
+
+    // interpolate the values in y direction
+    const auto yFactor = xyCoord.y - y0;
+    return linearInterpolate(g0, g1, yFactor);
+    
 }
 
 

@@ -417,7 +417,39 @@ glm::vec4 Renderer::getTFValue(float val) const
 // Use the getTF2DOpacity function that you implemented to compute the opacity according to the 2D transfer function.
 glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
 {
-    return glm::vec4(0.0f);
+    // The current position along the ray.
+    glm::vec3 samplePos = ray.origin + ray.tmin * ray.direction;
+
+    // The increment in the ray direction for each sample.
+    const glm::vec3 increment = sampleStep * ray.direction;
+
+    // The accumulated opacity along the ray.
+    float accumulatedOpacity = 0.0f;
+
+    // The accumulated color along the ray.
+    glm::vec4 accumulatedColor(0.0f);
+
+    for (float t = ray.tmin; t <= ray.tmax; t += sampleStep, samplePos += increment) {
+        // Get the volume value at the current sample position.
+        const float val = m_pVolume->getSampleInterpolate(samplePos);
+        auto gradient = m_pGradientVolume->getGradientInterpolate(samplePos);
+        auto magnitude = gradient.magnitude;
+
+        // get color from config
+        const glm::vec4 tfColor = m_config.TF2DColor;
+        const float tfOpacity = getTF2DOpacity(val, magnitude);
+
+        // Accumulate the color and opacity along the ray.
+        accumulatedColor += (1.0f - accumulatedOpacity) * tfOpacity * tfColor;
+        accumulatedOpacity += (1.0f - accumulatedOpacity) * tfOpacity;
+
+        // If the accumulated opacity is 1.0f then we can stop tracing the ray.
+        if (accumulatedOpacity >= 1.0f)
+            break;
+    }
+
+    // Return the accumulated color.
+    return accumulatedColor;
 
 }
 
@@ -430,7 +462,12 @@ glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
 // The 2D transfer function settings can be accessed through m_config.TF2DIntensity and m_config.TF2DRadius.
 float Renderer::getTF2DOpacity(float intensity, float gradientMagnitude) const
 {
-    return 0.0f;
+    float rad_angle = (180.0f - m_config.TF2DRadius) * 3.14159265358979323846f / (2 * 180.0f);
+    float tangent = std::tan(rad_angle);
+
+    float delta_x = std::abs(gradientMagnitude / tangent);
+
+    return std::max(0.0f, 1.0f - (std::abs(intensity - m_config.TF2DIntensity) / delta_x)) / 7.0f;
 }
 
 // This function computes if a ray intersects with the axis-aligned bounding box around the volume.

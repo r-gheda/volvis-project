@@ -183,7 +183,7 @@ glm::vec4 Renderer::traceRayISO(const Ray& ray, float sampleStep) const
  
     //if volume shading is disabled, then simply return the isoColor from the isoValue
     if (!m_config.volumeShading){
-       
+        
         // The current position along the ray.
         glm::vec3 samplePos = ray.origin + ray.tmin * ray.direction;
 
@@ -193,6 +193,7 @@ glm::vec4 Renderer::traceRayISO(const Ray& ray, float sampleStep) const
         float res = 0.0f;
 
         for (float t = ray.tmin; t <= ray.tmax; t += sampleStep, samplePos += increment) {
+            
             // Get the volume value at the current sample position.
             float val = m_pVolume->getSampleInterpolate(samplePos);
             
@@ -215,48 +216,34 @@ glm::vec4 Renderer::traceRayISO(const Ray& ray, float sampleStep) const
     //at that location using the local gradient (from m_pGradientVolume)
     else {
 
-        //DRAFT, PROBABLY DOESN'T WORK
-
-        // If volume shading is ENABLED then return the phong-shaded color at that location using the local gradient (from m_pGradientVolume).
-        //   Use the camera position (m_pCamera->position()) as the light position.
-        // Use the bisectionAccuracy function (to be implemented) to get a more precise isosurface location between two steps.
-
-        // The current position along the ray.
         glm::vec3 samplePos = ray.origin + ray.tmin * ray.direction;
-
-        // The increment in the ray direction for each sample.
         const glm::vec3 increment = sampleStep * ray.direction;
 
         for (float t = ray.tmin; t <= ray.tmax; t += sampleStep, samplePos += increment) {
-            // Get the volume value at the current sample position.
-            float val = m_pVolume->getSampleInterpolate(samplePos);
-            
-            // If the value at the current sample position is greater than the iso value then we have found the isosurface.
-            if (val > m_config.isoValue) {
 
-                //get the gradient at the current sample position
-                volume::GradientVoxel gradient = m_pGradientVolume->getGradientInterpolate(samplePos);
+            float val1 = m_pVolume->getSampleInterpolate(samplePos);
+            float val2 = m_pVolume->getSampleInterpolate(samplePos + increment);
 
-                //get the light vector
-                glm::vec3 V = glm::normalize(m_pCamera->position() - samplePos);
+            // If the isosurface might be between the current and next sample positions
+            if ((val1 < m_config.isoValue && val2 > m_config.isoValue) || (val1 > m_config.isoValue && val2 < m_config.isoValue)) {
 
-                //get the view vector
-                glm::vec3 L = glm::normalize(samplePos - ray.origin);
+                float preciseT = bisectionAccuracy(ray, t, t + sampleStep, m_config.isoValue);
+                glm::vec3 precisePos = ray.origin + preciseT * ray.direction;
 
-                //compute the phong shading
+                volume::GradientVoxel gradient = m_pGradientVolume->getGradientInterpolate(precisePos);
+                glm::vec3 V = glm::normalize(m_pCamera->position() - precisePos); // View vector
+                glm::vec3 L = glm::normalize(precisePos - ray.origin ); // Light vector
+
                 glm::vec3 phongShading = computePhongShading(color, gradient, L, V);
 
-                return glm::vec4(phongShading, 1.0f);
+                return glm::vec4(phongShading, 1.0f); 
             }
-            
+
         }
 
-        return glm::vec4(glm::vec3(0.0f), 1.0f);
+        return glm::vec4(glm::vec3(0.0f), 1.0f); // Return default color if no intersection found
+}
 
-        //END DRAFT
-
-
-    }
     
     
 
@@ -267,80 +254,35 @@ glm::vec4 Renderer::traceRayISO(const Ray& ray, float sampleStep) const
 // iterations such that it does not get stuck in degerate cases.
 float Renderer::bisectionAccuracy(const Ray& ray, float t0, float t1, float isoValue) const
 {   
-    // The number of iterations to perform.
-    static constexpr int maxIterations = 100;
+    static constexpr int maxIterations = 30; // Maximum number of iterations
 
-    // The current iteration.
-    int iteration = 0;
+    float precision = 0.01f; // Precision of the result
+    
+    float a = t0; // Start of the interval
+    float b = t1; // End of the interval
+    float c;      // Midpoint of the interval
+    float fc;     // Function value at midpoint
 
-    // The current interval.
-    float a = t0;
-    float b = t1;
+    for (int iteration = 0; iteration < maxIterations; iteration++) {
+        c = (a + b) / 2.0f; // Compute the midpoint of the interval
 
-    // The current value at the midpoint of the interval.
-    float fc = 0.0f;
-
-    // The current midpoint.
-    float c = 0.0f;
-
-    // The difference between the current value and the iso value.
-    float diff = 0.0f;
-
-    // The current absolute difference between the current value and the iso value.
-    float absDiff = 0.0f;
-
-    // The current absolute difference between the current interval.
-    float absInterval = 0.0f;
-
-    // The current absolute difference between the current interval and the iso value.
-    float absIntervalDiff = 0.0f;
-
-
-    for (iteration = 0; iteration < maxIterations; iteration++) {
-        // Compute the midpoint of the interval.
-        c = (a + b) / 2.0f;
-
-        // Compute the value at the midpoint.
+        // Compute the value at the midpoint
         fc = m_pVolume->getSampleInterpolate(ray.origin + c * ray.direction);
 
-        // Compute the difference between the value at the midpoint and the iso value.
-        diff = fc - isoValue;
-
-        // Compute the absolute difference between the value at the midpoint and the iso value.
-        absDiff = std::abs(diff);
-
-        // Compute the absolute difference between the interval.
-        absInterval = std::abs(b - a);
-
-        // Compute the absolute difference between the interval and the iso value.
-        absIntervalDiff = std::abs(isoValue - c);
-
-        // If the absolute difference between the value at the midpoint and the iso value is less than 0.01 then we are done.
-        if (absDiff < 0.01f)
-            break;
-
-        // If the absolute difference between the interval is less than 0.01 then we are done.
-        if (absInterval < 0.01f)
-            break;
-
-        // If the absolute difference between the interval and the iso value is less than 0.01 then we are done.
-        if (absIntervalDiff < 0.01f){
-            break;
+        // Check if the value at midpoint is close enough to isoValue or if the interval is sufficiently small
+        if (std::abs(fc - isoValue) < precision || std::abs(b - a) < precision) {
+            break; // Terminate if close to desired value or interval is too small
         }
-        // If the value at the midpoint is less than the iso value then the iso value lies in the upper half of the interval.
+
+        // Narrow the search interval
         if (fc < isoValue) {
-            // Set the start of the interval to the midpoint.
-            a = c;
-        }
-        // Otherwise the iso value lies in the lower half of the interval.
-        else {
-            // Set the end of the interval to the midpoint.
-            b = c;
+            a = c; // Value lies in the upper half
+        } else {
+            b = c; // Value lies in the lower half
         }
     }
 
-    // Return the midpoint of the interval.
-    return c;
+    return c; // Return the midpoint of the interval
 }
 
 // ======= TODO: IMPLEMENT ========

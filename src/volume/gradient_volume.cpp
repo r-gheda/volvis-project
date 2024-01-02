@@ -137,9 +137,9 @@ GradientVoxel GradientVolume::getGradientLinearInterpolate(const glm::vec3& coor
     GradientVoxel g110 = getGradient(x1, y1, z0);
     GradientVoxel g111 = getGradient(x1, y1, z1);
    // Calculate the interpolation factors for each axis
-    float fx = coord.x - x0;
-    float fy = coord.y - y0;
-    float fz = coord.z - z0;
+    float fx = coord.x - static_cast<float>(x0);
+    float fy = coord.y - static_cast<float>(y0);
+    float fz = coord.z - static_cast<float>(z0);
 
     // Interpolate along x for the bottom and top of the voxel
     GradientVoxel g00 = linearInterpolate(g000, g100, fx);

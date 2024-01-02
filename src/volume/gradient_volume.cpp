@@ -114,7 +114,11 @@ GradientVoxel GradientVolume::getGradientNearestNeighbor(const glm::vec3& coord)
 // Returns the trilinearly interpolated gradinet at the given coordinate.
 // Use the linearInterpolate function that you implemented below.
 GradientVoxel GradientVolume::getGradientLinearInterpolate(const glm::vec3& coord) const
-{
+{   
+
+    if (glm::any(glm::lessThan(coord, glm::vec3(0))) || glm::any(glm::greaterThanEqual(coord + 1.0f, glm::vec3(m_dim))))
+        return { glm::vec3(0.0f), 0.0f };
+
     //get the 8 points around the coord
     int x0 = static_cast<int>(floor(coord.x));
     int x1 = static_cast<int>(ceil(coord.x));
@@ -132,85 +136,23 @@ GradientVoxel GradientVolume::getGradientLinearInterpolate(const glm::vec3& coor
     GradientVoxel g101 = getGradient(x1, y0, z1);
     GradientVoxel g110 = getGradient(x1, y1, z0);
     GradientVoxel g111 = getGradient(x1, y1, z1);
+   // Calculate the interpolation factors for each axis
+    float fx = coord.x - x0;
+    float fy = coord.y - y0;
+    float fz = coord.z - z0;
 
-    //get the 8 magnitudes
-    float m000 = g000.magnitude;
-    float m001 = g001.magnitude;
-    float m010 = g010.magnitude;
-    float m011 = g011.magnitude;
+    // Interpolate along x for the bottom and top of the voxel
+    GradientVoxel g00 = linearInterpolate(g000, g100, fx);
+    GradientVoxel g01 = linearInterpolate(g001, g101, fx);
+    GradientVoxel g10 = linearInterpolate(g010, g110, fx);
+    GradientVoxel g11 = linearInterpolate(g011, g111, fx);
 
-    float m100 = g100.magnitude;
-    float m101 = g101.magnitude;
-    float m110 = g110.magnitude;
-    float m111 = g111.magnitude;
+    // Interpolate along y
+    GradientVoxel g0 = linearInterpolate(g00, g10, fy);
+    GradientVoxel g1 = linearInterpolate(g01, g11, fy);
 
-    //get the 8 directions
-    glm::vec3 d000 = g000.dir;
-    glm::vec3 d001 = g001.dir;
-    glm::vec3 d010 = g010.dir;
-    glm::vec3 d011 = g011.dir;
-
-    glm::vec3 d100 = g100.dir;
-    glm::vec3 d101 = g101.dir;
-    glm::vec3 d110 = g110.dir;
-    glm::vec3 d111 = g111.dir;
-
-    //get the 8 points
-    glm::vec3 p000 = glm::vec3(x0, y0, z0);
-    glm::vec3 p001 = glm::vec3(x0, y0, z1);
-    glm::vec3 p010 = glm::vec3(x0, y1, z0);
-    glm::vec3 p011 = glm::vec3(x0, y1, z1);
-
-    glm::vec3 p100 = glm::vec3(x1, y0, z0);
-    glm::vec3 p101 = glm::vec3(x1, y0, z1);
-    glm::vec3 p110 = glm::vec3(x1, y1, z0);
-    glm::vec3 p111 = glm::vec3(x1, y1, z1);
-
-    //get the 8 distances
-    float d000_ = glm::distance(coord, p000);
-    float d001_ = glm::distance(coord, p001);
-    float d010_ = glm::distance(coord, p010);
-    float d011_ = glm::distance(coord, p011);
-
-    float d100_ = glm::distance(coord, p100);
-    float d101_ = glm::distance(coord, p101);
-    float d110_ = glm::distance(coord, p110);
-    float d111_ = glm::distance(coord, p111);
-
-    //get the 8 factors
-    float f000 = 1 / d000_;
-    float f001 = 1 / d001_;
-    float f010 = 1 / d010_;
-    float f011 = 1 / d011_;
-
-    float f100 = 1 / d100_;
-    float f101 = 1 / d101_;
-    float f110 = 1 / d110_;
-    float f111 = 1 / d111_;
-
-    //get the 8 gradients
-    GradientVoxel g000_ = GradientVoxel { d000, m000 };
-    GradientVoxel g001_ = GradientVoxel { d001, m001 };
-    GradientVoxel g010_ = GradientVoxel { d010, m010 };
-    GradientVoxel g011_ = GradientVoxel { d011, m011 };
-
-    GradientVoxel g100_ = GradientVoxel { d100, m100 };
-    GradientVoxel g101_ = GradientVoxel { d101, m101 };
-    GradientVoxel g110_ = GradientVoxel { d110, m110 };
-    GradientVoxel g111_ = GradientVoxel { d111, m111 };
-
-    //get the 4 gradients
-    GradientVoxel g00 = linearInterpolate(g000_, g001_, f000);
-    GradientVoxel g01 = linearInterpolate(g010_, g011_, f001);
-    GradientVoxel g10 = linearInterpolate(g100_, g101_, f010);
-    GradientVoxel g11 = linearInterpolate(g110_, g111_, f011);
-
-    //get the 2 gradients
-    GradientVoxel g0 = linearInterpolate(g00, g01, f000);
-    GradientVoxel g1 = linearInterpolate(g10, g11, f001);
-
-    //get the 1 gradient
-    GradientVoxel g = linearInterpolate(g0, g1, f000);
+    // Interpolate along z
+    GradientVoxel g = linearInterpolate(g0, g1, fz);
 
     return g;
 }
@@ -219,7 +161,8 @@ GradientVoxel GradientVolume::getGradientLinearInterpolate(const glm::vec3& coor
 // This function should linearly interpolates the value from g0 to g1 given the factor (t).
 // At t=0, linearInterpolate should return g0 and at t=1 it returns g1.
 GradientVoxel GradientVolume::linearInterpolate(const GradientVoxel& g0, const GradientVoxel& g1, float factor)
-{
+{   
+    factor = glm::clamp(factor, 0.0f, 1.0f);
     //linear interpolation of the magnitude
     float magnitude = g0.magnitude + factor * (g1.magnitude - g0.magnitude);
 

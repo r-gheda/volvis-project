@@ -378,22 +378,17 @@ glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
 
     // The accumulated opacity along the ray.
     float accumulatedOpacity = 0.0f;
-
-    // The accumulated color along the ray.
-    glm::vec4 accumulatedColor(0.0f);
+    float maxsofar = 0.0f;
 
     for (float t = ray.tmin; t <= ray.tmax; t += sampleStep, samplePos += increment) {
         // Get the volume value at the current sample position.
         const float val = m_pVolume->getSampleInterpolate(samplePos);
         auto gradient = m_pGradientVolume->getGradientInterpolate(samplePos);
         auto magnitude = gradient.magnitude;
-
-        // get color from config
-        const glm::vec4 tfColor = m_config.TF2DColor;
+        maxsofar = std::max(maxsofar, magnitude);
         const float tfOpacity = getTF2DOpacity(val, magnitude);
 
-        // Accumulate the color and opacity along the ray.
-        accumulatedColor += (1.0f - accumulatedOpacity) * tfOpacity * tfColor;
+        // Accumulate opacity along the ray.
         accumulatedOpacity += (1.0f - accumulatedOpacity) * tfOpacity;
 
         // If the accumulated opacity is 1.0f then we can stop tracing the ray.
@@ -402,7 +397,7 @@ glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
     }
 
     // Return the accumulated color.
-    return accumulatedColor;
+    return accumulatedOpacity * m_config.TF2DColor;
 
 }
 
@@ -415,12 +410,13 @@ glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
 // The 2D transfer function settings can be accessed through m_config.TF2DIntensity and m_config.TF2DRadius.
 float Renderer::getTF2DOpacity(float intensity, float gradientMagnitude) const
 {
-    float rad_angle = (180.0f - m_config.TF2DRadius) * 3.14159265358979323846f / (2 * 180.0f);
-    float tangent = std::tan(rad_angle);
+    float y = m_pGradientVolume->maxMagnitude() - m_pGradientVolume->minMagnitude();
+    float x = m_config.TF2DRadius;
 
-    float delta_x = std::abs(gradientMagnitude / tangent);
+    float delta_x = gradientMagnitude * x / y;
+    float distance = std::abs(intensity - m_config.TF2DIntensity);
 
-    return std::max(0.0f, 1.0f - (std::abs(intensity - m_config.TF2DIntensity) / delta_x)) / 7.0f;
+    return std::max(0.0f, 1.0f - distance / delta_x);
 }
 
 // This function computes if a ray intersects with the axis-aligned bounding box around the volume.

@@ -21,9 +21,9 @@ static constexpr float pointRadius = 8.0f;
 static constexpr glm::ivec2 widgetSize { 475, 300 };
 
 TransferFunction2DWidget::TransferFunction2DWidget(const volume::Volume& volume, const volume::GradientVolume& gradient)
-    : m_intensity(68.0f)
+    : m_intensity(92.34f)
     , m_maxIntensity(volume.maximum())
-    , m_radius(38.0f)
+    , m_radius(125.26f)
     , m_color(0.0f, 0.8f, 0.6f, 0.3f)
     , m_interactingPoint(-1)
     , m_histogramImg(0)

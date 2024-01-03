@@ -368,56 +368,52 @@ glm::vec4 Renderer::getTFValue(float val) const
 // ======= TODO: IMPLEMENT ========
 // In this function, implement 2D transfer function raycasting.
 // Use the getTF2DOpacity function that you implemented to compute the opacity according to the 2D transfer function.
+
 glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
 {
-    // The current position along the ray.
     glm::vec3 samplePos = ray.origin + ray.tmin * ray.direction;
-
-    // The increment in the ray direction for each sample.
     const glm::vec3 increment = sampleStep * ray.direction;
-
-    // The accumulated opacity along the ray.
     float accumulatedOpacity = 0.0f;
-    float maxsofar = 0.0f;
 
     for (float t = ray.tmin; t <= ray.tmax; t += sampleStep, samplePos += increment) {
-        // Get the volume value at the current sample position.
+
         const float val = m_pVolume->getSampleInterpolate(samplePos);
         auto gradient = m_pGradientVolume->getGradientInterpolate(samplePos);
         auto magnitude = gradient.magnitude;
-        maxsofar = std::max(maxsofar, magnitude);
+
         const float tfOpacity = getTF2DOpacity(val, magnitude);
-
-        // Accumulate opacity along the ray.
+        
         accumulatedOpacity += (1.0f - accumulatedOpacity) * tfOpacity;
-
-        // If the accumulated opacity is 1.0f then we can stop tracing the ray.
+        
         if (accumulatedOpacity >= 1.0f)
             break;
     }
 
-    // Return the accumulated color.
     return accumulatedOpacity * m_config.TF2DColor;
-
 }
+
 
 // ======= TODO: IMPLEMENT ========
 // This function should return an opacity value for the given intensity and gradient according to the 2D transfer function.
 // Calculate whether the values are within the radius/intensity triangle defined in the 2D transfer function widget.
 // If so: return a tent weighting as described in the assignment
 // Otherwise: return 0.0f
-//
+
 // The 2D transfer function settings can be accessed through m_config.TF2DIntensity and m_config.TF2DRadius.
 float Renderer::getTF2DOpacity(float intensity, float gradientMagnitude) const
-{
+{   
+    
     float y = m_pGradientVolume->maxMagnitude() - m_pGradientVolume->minMagnitude();
-    float x = m_config.TF2DRadius;
+    float x = m_config.TF2DRadius;        
+    float delta_x = (gradientMagnitude * x)  / y;
 
-    float delta_x = gradientMagnitude * x / y;
-    float distance = std::abs(intensity - m_config.TF2DIntensity);
+    //float distance = sqrt(pow((intensity - m_config.TF2DIntensity), 2) + pow((gradientMagnitude - delta_x), 2));
+    float distance = std::abs(intensity - m_config.TF2DIntensity) + std::abs(gradientMagnitude - delta_x);
 
-    return std::max(0.0f, 1.0f - distance / delta_x);
+    return std::max(0.0f, 1.0f - distance/delta_x);
+    
 }
+
 
 // This function computes if a ray intersects with the axis-aligned bounding box around the volume.
 // If the ray intersects then tmin/tmax are set to the distance at which the ray hits/exists the

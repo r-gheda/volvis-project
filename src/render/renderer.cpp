@@ -427,15 +427,17 @@ float Renderer::getTF2DOpacity(float intensity, float gradientMagnitude) const
         //TODO: return a tent weighting as follows:
         //set the values on the vertical line through the apex of the triangle to an opacity of 1 and from there towards the diagonal borders fall off to an opacity of zero by creating a linear transition that is aligned horizontally.
 
+        float distancefromApex = 0.0f;
+
         if (intensity < apexIntensity) {
-            float distancefromApex = apexIntensity - intensity;
-            return 0.25f*(1.0f - (distancefromApex) / m_config.TF2DRadius);
+            distancefromApex = apexIntensity - intensity;
 
         }
         else {
-            float distancefromApex = intensity - apexIntensity;
-            return 0.25f*(1.0f - (distancefromApex) / m_config.TF2DRadius);
+            distancefromApex = intensity - apexIntensity;
+            
         }
+        return 0.25f*(1.0f - (distancefromApex) / m_config.TF2DRadius);
         
         
        

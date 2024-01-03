@@ -374,6 +374,7 @@ glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
     glm::vec3 samplePos = ray.origin + ray.tmin * ray.direction;
     const glm::vec3 increment = sampleStep * ray.direction;
     float accumulatedOpacity = 0.0f;
+    glm::vec4 accumulatedColor(0.0f);
 
     for (float t = ray.tmin; t <= ray.tmax; t += sampleStep, samplePos += increment) {
 
@@ -383,13 +384,16 @@ glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
 
         const float tfOpacity = getTF2DOpacity(val, magnitude);
         
+        accumulatedColor += (1.0f - accumulatedOpacity) * tfOpacity * m_config.TF2DColor;
         accumulatedOpacity += (1.0f - accumulatedOpacity) * tfOpacity;
-        
-        if (accumulatedOpacity >= 1.0f)
+
+        if (accumulatedOpacity >= 1.0f){
+
             break;
+        }
     }
 
-    return accumulatedOpacity * m_config.TF2DColor;
+    return accumulatedColor;
 }
 
 
@@ -403,14 +407,43 @@ glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
 float Renderer::getTF2DOpacity(float intensity, float gradientMagnitude) const
 {   
     
-    float y = m_pGradientVolume->maxMagnitude() - m_pGradientVolume->minMagnitude();
-    float x = m_config.TF2DRadius;        
-    float delta_x = (gradientMagnitude * x)  / y;
+    float apexIntensity = m_config.TF2DIntensity;
+    float apexGradientMagnitude = m_pGradientVolume->minMagnitude();
 
-    //float distance = sqrt(pow((intensity - m_config.TF2DIntensity), 2) + pow((gradientMagnitude - delta_x), 2));
-    float distance = std::abs(intensity - m_config.TF2DIntensity) + std::abs(gradientMagnitude - delta_x);
+    float baseIntensity1 = apexIntensity - m_config.TF2DRadius;
+    float baseIntensity2 = apexIntensity + m_config.TF2DRadius;
+    float baseGradientMagnitude = m_pGradientVolume->maxMagnitude();
+    
+    //calculate the line that connects the first base point to the apex
+    float m1 = (apexGradientMagnitude - baseGradientMagnitude) / (apexIntensity - baseIntensity1);
+    float q1 = apexGradientMagnitude - m1 * apexIntensity;
 
-    return std::max(0.0f, 1.0f - distance/delta_x);
+    //calculate the line that connects the second base point to the apex
+    float m2 = (apexGradientMagnitude - baseGradientMagnitude) / (apexIntensity - baseIntensity2);
+    float q2 = apexGradientMagnitude - m2 * apexIntensity;
+
+    //check if the point is inside the triangle
+    if (gradientMagnitude > m1 * intensity + q1 && gradientMagnitude > m2 * intensity + q2 && gradientMagnitude < baseGradientMagnitude && intensity > baseIntensity1 && intensity < baseIntensity2) {
+        //TODO: return a tent weighting as follows:
+        //set the values on the vertical line through the apex of the triangle to an opacity of 1 and from there towards the diagonal borders fall off to an opacity of zero by creating a linear transition that is aligned horizontally.
+
+        if (intensity < apexIntensity) {
+            float distancefromApex = apexIntensity - intensity;
+            return 0.25f*(1.0f - (distancefromApex) / m_config.TF2DRadius);
+
+        }
+        else {
+            float distancefromApex = intensity - apexIntensity;
+            return 0.25f*(1.0f - (distancefromApex) / m_config.TF2DRadius);
+        }
+        
+        
+       
+    }
+    else {
+        return 0.0f;
+    }
+    
     
 }
 

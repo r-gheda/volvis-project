@@ -225,8 +225,7 @@ glm::vec4 Renderer::traceRayISO(const Ray& ray, float sampleStep) const
             float val2 = m_pVolume->getSampleInterpolate(samplePos + increment);
 
             // If the isosurface might be between the current and next sample positions
-            if ((val1 < m_config.isoValue && val2 > m_config.isoValue) || (val1 > m_config.isoValue && val2 < m_config.isoValue)) {
-
+            if (val1 > m_config.isoValue || val2 > m_config.isoValue) {
                 float preciseT = bisectionAccuracy(ray, t, t + sampleStep, m_config.isoValue);
                 glm::vec3 precisePos = ray.origin + preciseT * ray.direction;
 
@@ -374,26 +373,24 @@ glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
     glm::vec3 samplePos = ray.origin + ray.tmin * ray.direction;
     const glm::vec3 increment = sampleStep * ray.direction;
     float accumulatedOpacity = 0.0f;
-    glm::vec4 accumulatedColor(0.0f);
 
     for (float t = ray.tmin; t <= ray.tmax; t += sampleStep, samplePos += increment) {
 
-        const float val = m_pVolume->getSampleInterpolate(samplePos);
+        auto val = m_pVolume->getSampleInterpolate(samplePos);
         auto gradient = m_pGradientVolume->getGradientInterpolate(samplePos);
         auto magnitude = gradient.magnitude;
 
         const float tfOpacity = getTF2DOpacity(val, magnitude);
         
-        accumulatedColor += (1.0f - accumulatedOpacity) * tfOpacity * m_config.TF2DColor;
         accumulatedOpacity += (1.0f - accumulatedOpacity) * tfOpacity;
 
         if (accumulatedOpacity >= 1.0f){
-
+            accumulatedOpacity = 1.0f;
             break;
         }
     }
 
-    return accumulatedColor;
+    return m_config.TF2DColor * accumulatedOpacity;
 }
 
 
@@ -405,39 +402,17 @@ glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
 
 // The 2D transfer function settings can be accessed through m_config.TF2DIntensity and m_config.TF2DRadius.
 float Renderer::getTF2DOpacity(float intensity, float gradientMagnitude) const
-{   
-    
-    float apexIntensity = m_config.TF2DIntensity;
-    float apexGradientMagnitude = m_pGradientVolume->minMagnitude();
+{
+    float y = m_pGradientVolume->maxMagnitude() - m_pGradientVolume->minMagnitude();
+    float x = m_config.TF2DRadius;
 
-    float baseIntensity1 = apexIntensity - m_config.TF2DRadius;
-    float baseIntensity2 = apexIntensity + m_config.TF2DRadius;
-    float baseGradientMagnitude = m_pGradientVolume->maxMagnitude();
-    
-    //calculate the line that connects the first base point to the apex
-    float m1 = (apexGradientMagnitude - baseGradientMagnitude) / (apexIntensity - baseIntensity1);
-    float q1 = apexGradientMagnitude - m1 * apexIntensity;
+    // linear coefficient of the triangle segment
+    float m = y / x;
 
-    //calculate the line that connects the second base point to the apex
-    float m2 = (apexGradientMagnitude - baseGradientMagnitude) / (apexIntensity - baseIntensity2);
-    float q2 = apexGradientMagnitude - m2 * apexIntensity;
-
-    //check if the point is inside the triangle
-    if (gradientMagnitude > m1 * intensity + q1 && gradientMagnitude > m2 * intensity + q2 && gradientMagnitude < baseGradientMagnitude && intensity > baseIntensity1 && intensity < baseIntensity2) {
-        //TODO: return a tent weighting as follows:
-        //set the values on the vertical line through the apex of the triangle to an opacity of 1 and from there towards the diagonal borders fall off to an opacity of zero by creating a linear transition that is aligned horizontally.
-
-        float distancefromApex = std::abs(intensity - apexIntensity);
-        
-        float gradientscalefactor = 1.0f / m_pGradientVolume->maxMagnitude();
-        return std::abs(gradientMagnitude * gradientscalefactor) * (1.0f - distancefromApex / m_config.TF2DRadius) / 2.0f;
-        
-    }
-    else {
-        return 0.0f;
-    }
+    float max_distance = (gradientMagnitude - m_pGradientVolume->minMagnitude()) / m;
+    float distance = std::abs(intensity - m_config.TF2DIntensity);
     
-    
+    return std::max(0.0f,  1.0f - (distance / max_distance));
 }
 
 

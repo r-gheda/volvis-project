@@ -382,7 +382,7 @@ glm::vec4 Renderer::traceRayTF2D(const Ray& ray, float sampleStep) const
 
         const float tfOpacity = getTF2DOpacity(val, magnitude);
         
-        accumulatedOpacity += (1.0f - accumulatedOpacity) * tfOpacity;
+        accumulatedOpacity += (1.0f - accumulatedOpacity) * tfOpacity * m_config.TF2DColor.a;
 
         if (accumulatedOpacity >= 1.0f){
             accumulatedOpacity = 1.0f;

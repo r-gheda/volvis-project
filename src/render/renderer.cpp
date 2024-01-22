@@ -303,12 +303,24 @@ glm::vec3 Renderer::computePhongShading(const glm::vec3& color, const volume::Gr
 
     // diffuse
     float cos_theta = glm::dot(glm::normalize(gradient.dir), L);
-    glm::vec3 diffuse = kd * color * cos_theta;
+    glm::vec3 diffuse = (kd * color * std::abs(cos_theta));
+    // check if diffuse contains nan
+    if (glm::any(glm::isnan(diffuse))) {
+        diffuse = glm::vec3(0.0f);
+    }
 
     // specular
     float cos_phi = glm::dot(glm::normalize(glm::reflect(L, gradient.dir)), V);
     glm::vec3 specular = ks * (glm::vec3(1.0)) * std::pow(std::abs(cos_phi), alpha);
 
+    // std::cout << " ambient: " << ambient.r << " " << ambient.g << " " << ambient.b << std::endl;
+    // std::cout << " diffuse: " << diffuse.r << " " << diffuse.g << " " << diffuse.b << std::endl;
+    // std::cout << " specular: " << specular.r << " " << specular.g << " " << specular.b << std::endl;
+
+    // auto res = ambient + diffuse + specular;
+    // std::cout << " res: " << res.r << " " << res.g << " " << res.b << std::endl;
+
+    // return ambient;
     return  (ambient + diffuse + specular);
 }
 
@@ -336,8 +348,22 @@ glm::vec4 Renderer::traceRayComposite(const Ray& ray, float sampleStep) const
 
         // Get the color and opacity from the 1D transfer function.
         const glm::vec4 tfValue = getTFValue(val);
-        const glm::vec3 tfColor = glm::vec3(tfValue);
+        glm::vec3 tfColor = glm::vec3(tfValue);
         const float tfOpacity = tfValue.a;
+
+        if (m_config.volumeShading)
+        {
+            glm::vec3 precisePos = ray.origin + t * ray.direction;
+
+            volume::GradientVoxel gradient = m_pGradientVolume->getGradientInterpolate(precisePos);
+            glm::vec3 V = glm::normalize(m_pCamera->position() - precisePos); // View vector
+            glm::vec3 L = glm::normalize(precisePos - ray.origin ); // Light vector
+            // std::cout << "L: " << L.r << " " << L.g << " " << L.b << std::endl;
+            // std::cout << "V: " << V.r << " " << V.g << " " << V.b << std::endl;
+            // std::cout << "gradient: " << gradient.dir.r << " " << gradient.dir.g << " " << gradient.dir.b << std::endl;
+
+            tfColor = computePhongShading(tfColor, gradient, L, V);
+        }
 
         // Accumulate the color and opacity along the ray.
         accumulatedColor += (1.0f - accumulatedOpacity) * tfOpacity * glm::vec4(tfColor, 1.0f);
@@ -350,7 +376,6 @@ glm::vec4 Renderer::traceRayComposite(const Ray& ray, float sampleStep) const
 
     // Return the accumulated color.
     return accumulatedColor;
-    
 }
 
 // ======= DO NOT MODIFY THIS FUNCTION ========
